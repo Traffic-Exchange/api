@@ -1,4 +1,4 @@
-(async function(){
+//(async function(){
   let backlinkTemplates=['https://www.facebook.com/sharer/sharer.php?u=[ENCODE_URL]','https://twitter.com/intent/tweet?url=[ENCODE_URL]&text=[ENCODE_TITLE]'],
       youtubeBacklinkTemplates=['https://video.ultra-zone.net/watch.en.html.gz?v=[ID]','https://video.ultra-zone.net/watch.en.html.gz?v={{ID}}'],
       corsProxiesTemplates=['https://api.allorigins.win/raw?url=[ENCODE_URL]'];
@@ -183,4 +183,4 @@
     const param=decodeURIComponent(location.search.slice(1));
     if(param){ const norm=normalizeUrl(param); if(norm){ urlInput.value=norm; startRun(); } else alert('Invalid URL'); }
   });
-})(); 
+//})(); 
