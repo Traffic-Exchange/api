@@ -1,5 +1,4 @@
-(() => {
-  // ——— DEFAULT TEMPLATES —————————————————————————————————————————————
+// ——— DEFAULT TEMPLATES —————————————————————————————————————————————
   let backlinkTemplates = [
     'https://www.facebook.com/sharer/sharer.php?u=[ENCODE_URL]',
     'https://twitter.com/intent/tweet?url=[ENCODE_URL]&text=[ENCODE_TITLE]',
@@ -488,4 +487,3 @@ function handlePingError(slot, idx) {
 
     init();
   });
-})();
