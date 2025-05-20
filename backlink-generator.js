@@ -63,10 +63,7 @@
 
   [modeSelect,reuseToggle,concurrencyRange,rerunCheckbox,shuffleCheckbox].forEach(el=>el.addEventListener('change',saveSettings));
   concurrencyRange.addEventListener('input',()=>{ concurrentCount.textContent=concurrencyRange.value; saveSettings(); });
-  
-  toggleAdv.addEventListener('click',()=>{ const hid=advPanel.style.display==='none'; advPanel.style.display=hid?'block':'none'; 	toggleAdv.innerHTML=hid?'⚙️ Advanced ▲':'⚙️ Advanced ▼'; });
-
-  
+  toggleAdv.addEventListener('click',()=>{ advPanel.style.display = advPanel.style.display==='none' ? 'block' : 'none'; });
   startBtn.addEventListener('click',()=> running ? stopRun() : startRun());
   copyBtn.addEventListener('click',()=>{ newUrlInput.select(); document.execCommand('copy'); });
 
@@ -84,40 +81,38 @@
     slot.busy=true;
     const {mode,url}=task;
     const li=document.createElement('li'); li.innerHTML=`<a href="${url}" target="_blank">${url}</a><span class="status loading">⏳</span>`; resultsUl.appendChild(li);
-    const mark = ok => { clearTimeout(slot.timeoutId); slot.busy=false; doneCount++; const span=li.querySelector('.status'); span.innerHTML=ok?'✔︎':'✖︎'; span.className='status '+(ok?'success':'failure'); updateProgress(); launchSlot(slot); };
+    const mark = ok => { clearTimeout(slot.timeoutId); slot.busy=false; doneCount++; const span=li.querySelector('.status'); span.textContent=ok?'✔︎':'✖︎'; span.className='status '+(ok?'success':'failure'); updateProgress(); launchSlot(slot); };
 
     if (mode === 'iframe') {
-      const ifr = document.createElement('iframe');
-      ifr.style.display = 'none';
-      document.body.appendChild(ifr);
+  const ifr = document.createElement('iframe');
+  ifr.style.display = 'none';
+  document.body.appendChild(ifr);
 
-      // Helper to clean up the iframe
-      const cleanup = () => ifr.remove();
+  // Helper to clean up the iframe
+  const cleanup = () => ifr.remove();
 
-      // On load, clear the timeout, remove the iframe, and mark success
-      ifr.onload = () => {
-        clearTimeout(slot.timeoutId);
-        cleanup();
-        mark(true);
-      };
+  // On load, clear the timeout, remove the iframe, and mark success
+  ifr.onload = () => {
+    clearTimeout(slot.timeoutId);
+    cleanup();
+    mark(true);
+  };
 
-      // If we hit the timeout, remove the iframe and mark failure
-      slot.timeoutId = setTimeout(() => {
-        cleanup();
-        mark(false);
-      }, 8000);
+  // If we hit the timeout, remove the iframe and mark failure
+  slot.timeoutId = setTimeout(() => {
+    cleanup();
+    mark(false);
+  }, 8000);
 
-      // Kick off the navigation
-      ifr.src = url;
+  // Kick off the navigation
+  ifr.src = url;
 
-      return;  // skip the rest of the switch
-    } else if(mode==='popup' || mode==='tab'){
+  return;  // skip the rest of the switch
+} else if(mode==='popup' || mode==='tab'){
       const specs = mode==='popup' ? 'width=600,height=400' : '';
       if(reuseToggle.value==='fresh'){
         const w = window.open('about:blank','_blank',specs); if(!w){ alert('Pop-up blocked!'); mark(false); return; }
-        try{
-        	w.location.href = url;
-        }catch{}
+        w.location.href = url;
         slot.timeoutId = setTimeout(()=>{
           w.close(); mark(true);
         },8000);
@@ -183,4 +178,4 @@
     const param=decodeURIComponent(location.search.slice(1));
     if(param){ const norm=normalizeUrl(param); if(norm){ urlInput.value=norm; startRun(); } else alert('Invalid URL'); }
   });
-})(); 
+})();
