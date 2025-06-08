@@ -31,14 +31,6 @@ style.textContent = `
 document.head.appendChild(style);
 */
 
-
-function setExternalLink(txt, href){
-    	const linkEl = document.getElementById("externalLink");
-	linkEl.href = href;
-	//linkEl.style.display = "inline-block";
-	linkEl.textContent = "🔗 "+txt+" → " + (new URL(href)).hostname;
-}
-
   function normalizeUrl(raw){
     try{ let u=raw.trim(); if(!/^https?:\/\//i.test(u)) u='https://'+u; const p=new URL(u); p.hostname=p.hostname.replace(/^www\./i,''); if(!p.pathname||p.pathname==='/' ) p.pathname=''; return p.toString(); }catch{return null;}
   }
@@ -224,6 +216,13 @@ function setExternalLink(txt, href){
 	setExternalLink("Open Test", testUrl);
     }
   });
+
+function setExternalLink(txt, href){
+    	const linkEl = document.getElementById("externalLink");
+	linkEl.href = href;
+	//linkEl.style.display = "inline-block";
+	linkEl.textContent = "🔗 "+txt+" → " + (new URL(href)).hostname;
+}
 
 /*
 document.getElementById('testBtn').addEventListener('click', () => {
