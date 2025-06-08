@@ -1,4 +1,5 @@
   let secretTemplates = [
+    //Test V2
     "https://archive.ph/submit/?anyway=1&url=[ENCODE_URL]",
     "https://web.archive.org/save/[ENCODE_URL]",
     "https://web.archive.org/web/[ENCODE_URL]",
