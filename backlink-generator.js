@@ -1,26 +1,3 @@
-const style = document.createElement('style');
-style.type = 'text/css';
-style.textContent = `
-  /* Fullscreen iframe styling v2 */
-  #fullIframe,
-  .full-iframe {
-    display: block;
-    border: none;
-    width: 100%;
-    height: 100%;
-  }
-  .hidden-iframe {
-    width: 1px;
-    height: 1px;
-    opacity: 0;
-    position: absolute;
-    top: -1000px; /* Move off-screen */
-    left: -1000px;
-    pointer-events: none;
-  }
-`;
-document.head.appendChild(style);
-
 let backlinkTemplates=['https://www.facebook.com/sharer/sharer.php?u=[ENCODE_URL]','https://twitter.com/intent/tweet?url=[ENCODE_URL]&text=[ENCODE_TITLE]'],
       youtubeBacklinkTemplates=['https://video.ultra-zone.net/watch.en.html.gz?v=[ID]','https://video.ultra-zone.net/watch.en.html.gz?v={{ID}}'],
       corsProxiesTemplates=['https://api.allorigins.win/raw?url=[ENCODE_URL]'];
