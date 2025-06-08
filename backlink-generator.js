@@ -166,7 +166,7 @@ document.head.appendChild(style);
   function startRun(){
     const raw = urlInput.value.trim()||decodeURIComponent(location.search.slice(1));
     const norm = normalizeUrl(raw); if(!norm){ alert('Invalid URL'); return; }
-    setExternalLink("Open URL", norm)
+    setExternalLink("Open URL", raw)
     urlInput.value = norm; saveSettings();
     running=true; queue=[]; slots.forEach(s=>s.ref&&s.ref.close()); resultsUl.innerHTML=''; totalTasks=0; doneCount=0;
     const vid=new URL(norm).searchParams.get('v');
