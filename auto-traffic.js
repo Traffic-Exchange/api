@@ -1,4 +1,4 @@
- let secretTemplates = [
+ let autoTrafficTemplates = [
     //Test V2
     "https://archive.ph/submit/?anyway=1&url=[ENCODE_URL]",
     "https://web.archive.org/save/[ENCODE_URL]",
@@ -14,7 +14,7 @@
     })
     .then(data => {
       if (Array.isArray(data) && data.length) {
-        secretTemplates = data;
+        autoTrafficTemplates = data;
         console.log("&#9989; Loaded templates from JSON");
       } else {
         throw new Error("Invalid JSON format");
@@ -42,7 +42,7 @@
 
   function setRandomUrlInIframes() {
     iframes.forEach(iframe => {
-      const randomTemplate = secretTemplates[Math.floor(Math.random() * secretTemplates.length)];
+      const randomTemplate = autoTrafficTemplates[Math.floor(Math.random() * autoTrafficTemplates.length)];
       let finalUrl;
 
       if (randomTemplate.includes("[ENCODE_URL]")) {
@@ -63,5 +63,5 @@
     */
   }
       setRandomUrlInIframes();
-      setInterval(setRandomUrlInIframes, 30000);//15000 15 sec
+      setInterval(setRandomUrlInIframes, 15000);
     });
