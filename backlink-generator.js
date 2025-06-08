@@ -178,9 +178,16 @@
     if(param){ const norm=normalizeUrl(param); if(norm){ urlInput.value=norm; startRun(); } else alert('Invalid URL'); }
   });
 
+/*
   document.getElementById('testBtn').addEventListener('click', () => {
     const here = window.location.href.split('#')[0];
     const testUrl = here + (here.includes('?') ? '&' : '?') + encodeURIComponent(here);
     document.getElementById('urlInput').value = testUrl;
     startRun();
   });
+*/
+document.addEventListener("DOMContentLoaded", () => {
+  const here = window.location.origin + window.location.pathname;
+  const testHref = here + "?" + encodeURIComponent(here);
+  document.getElementById("testLink").href = testHref;
+});
