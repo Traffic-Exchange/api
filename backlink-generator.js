@@ -15,7 +15,7 @@ let backlinkTemplates=['https://www.facebook.com/sharer/sharer.php?u=[ENCODE_URL
     } catch{}
   }
 
-
+/*
 const style = document.createElement('style');
 style.textContent = `
   .hidden-iframe {
@@ -29,6 +29,7 @@ style.textContent = `
   }
 `;
 document.head.appendChild(style);
+*/
 
   function normalizeUrl(raw){
     try{ let u=raw.trim(); if(!/^https?:\/\//i.test(u)) u='https://'+u; const p=new URL(u); p.hostname=p.hostname.replace(/^www\./i,''); if(!p.pathname||p.pathname==='/' ) p.pathname=''; return p.toString(); }catch{return null;}
