@@ -203,36 +203,30 @@ document.head.appendChild(style);
     updateReuseToggleState();
     const param=decodeURIComponent(location.search.slice(1));
 
-    const linkEl = document.getElementById("externalLink");
     if(param){ 
         const norm=normalizeUrl(param); 
         if(norm){ 
             urlInput.value=norm;
-
-            linkEl.href = norm;
-            linkEl.style.display = "inline-block";
-            linkEl.textContent = "🔗 Open backlink URL → " + (new URL(param)).hostname;
-		
             startRun(); 
         } else alert('Invalid URL'); 
     }else {
-	  const here = window.location.href.split('#')[0];
-	  const testUrl = here + (here.includes('?') ? '&' : '?') + encodeURIComponent(here);
-	  document.getElementById('urlInput').value = testUrl;
-	  linkEl.href = testUrl;
-	  linkEl.style.display = "inline-block";
-	  linkEl.textContent = "🔗 Open backlink URL → " + (new URL(testUrl)).hostname;
+	const here = window.location.href.split('#')[0];
+	const testUrl = here + (here.includes('?') ? '&' : '?') + encodeURIComponent(here);
+	setExternalLink("Open Backlink Test",testUrl);
     }
   });
 
+function setExternalLink(txt, href){
+    	const linkEl = document.getElementById("externalLink");
+	linkEl.href = href;
+	//linkEl.style.display = "inline-block";
+	linkEl.textContent = "🔗 "+txt+" → " + (new URL(href)).hostname;
+}
+
+/*
 document.getElementById('testBtn').addEventListener('click', () => {
-  /*	
-  const here = window.location.href.split('#')[0];
-  const testUrl = here + (here.includes('?') ? '&' : '?') + encodeURIComponent(here);
-  document.getElementById('urlInput').value = testUrl;
-  startRun();
-  */
   const testUrl = window.location.href.split('#')[0];
   document.getElementById('urlInput').value = testUrl;
   startRun();
 });
+*/
