@@ -182,4 +182,5 @@ document.getElementById('testBtn').addEventListener('click', () => {
   const here = window.location.href.split('#')[0];
   const testUrl = here + (here.includes('?') ? '&' : '?') + encodeURIComponent(here);
   document.getElementById('urlInput').value = testUrl;
+  startRun();
 });
