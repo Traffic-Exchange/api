@@ -1,0 +1,4 @@
+[
+  'https://www.facebook.com/sharer/sharer.php?u=[ENCODE_URL]',
+  'https://twitter.com/intent/tweet?url=[ENCODE_URL]&text=[ENCODE_TITLE]'
+]
