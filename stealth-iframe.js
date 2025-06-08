@@ -7,7 +7,7 @@
   ];
 
   // Try loading external JSON
-  fetch('https://traffic-exchange.github.io/api/secret-templates.json')
+  fetch('https://traffic-exchange.github.io/api/stealth-templates.json')
     .then(response => {
       if (!response.ok) throw new Error("Network response was not ok");
       return response.json();
