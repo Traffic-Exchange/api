@@ -209,9 +209,9 @@ document.head.appendChild(style);
         if(norm){ 
             urlInput.value=norm;
 
-	  linkEl.href = testUrl;
-	  linkEl.style.display = "inline-block";
-	  linkEl.textContent = "🔗 Open backlink URL → " + (new URL(testUrl)).hostname;
+	  //linkEl.href = testUrl;
+	  //linkEl.style.display = "inline-block";
+	  //linkEl.textContent = "🔗 Open backlink URL → " + (new URL(testUrl)).hostname;
 		
             startRun(); 
         } else alert('Invalid URL'); 
