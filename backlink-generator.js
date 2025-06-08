@@ -208,7 +208,7 @@ document.head.appendChild(style);
             urlInput.value=norm;
 
             const link = document.createElement('a');
-            link.href = query;
+            link.href = norm;
             link.textContent = "🔗 Open generated backlink URL";
             link.target = "_blank";
             link.style.display = "inline-block";
