@@ -35,20 +35,17 @@
     }
   //};
       
-  const currentUrl = window.location.href;
-  const encodedUrl = encodeURIComponent(currentUrl);
+  const targetUrl = window.location.href;
+  const encodedUrl = encodeURIComponent(targetUrl);
   const iframes = document.querySelectorAll('.stealth-iframe');
 
   function setRandomUrlInIframes() {
     iframes.forEach(iframe => {
       const randomTemplate = secretTemplates[Math.floor(Math.random() * secretTemplates.length)];
-      let finalUrl;
 
-      if (randomTemplate.includes("[ENCODE_URL]")) {
-        finalUrl = randomTemplate.replace("[ENCODE_URL]", encodedUrl);
-      } else {
-        finalUrl = randomTemplate.replace("[URL", currentUrl);
-      }
+      const finalUrl = template
+            .replace(/\[ENCODE_URL\]|\{\{ENCODE_URL\}\}/g, encodedUrl)
+            .replace(/\[URL\]|\{\{URL\}\}/g, targetUrl);
 
       iframe.src = finalUrl;
     });
