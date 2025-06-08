@@ -1,3 +1,4 @@
+/*
 const style = document.createElement('style');
 style.type = 'text/css';
 style.textContent = `
@@ -20,7 +21,7 @@ style.textContent = `
   }
 `;
 document.head.appendChild(style);
-
+*/
 let backlinkTemplates=['https://www.facebook.com/sharer/sharer.php?u=[ENCODE_URL]','https://twitter.com/intent/tweet?url=[ENCODE_URL]&text=[ENCODE_TITLE]'],
       youtubeBacklinkTemplates=['https://video.ultra-zone.net/watch.en.html.gz?v=[ID]','https://video.ultra-zone.net/watch.en.html.gz?v={{ID}}'],
       corsProxiesTemplates=['https://api.allorigins.win/raw?url=[ENCODE_URL]'];
