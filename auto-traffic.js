@@ -1,15 +1,15 @@
 window.addEventListener('load', () => {
   let autoTrafficTemplates = [
     "https://archive.ph/submit/?anyway=1&url=[ENCODE_URL]",
-    "https://web.archive.org/save/[ENCODE_URL]",
-    "https://web.archive.org/web/[ENCODE_URL]",
-    "https://web.archive.org/web/*/[ENCODE_URL]"
+    "https://web.archive.org/save/{{ENCODE_URL}}",
+    "https://mirror.example.com/visit?site=[URL]",
+    "https://backup.example.net/archive/{{URL}}"
   ];
 
   let targetUrls = [];
   let iframes = [];
 
-  // Immediately create 3 iframes
+  // Create hidden iframes immediately
   for (let i = 0; i < 3; i++) {
     const iframe = document.createElement('iframe');
     iframe.classList.add('hidden-iframe', 'auto-iframe');
@@ -32,13 +32,13 @@ window.addEventListener('load', () => {
           const encodedUrl = encodeURIComponent(targetUrl);
 
           const finalUrl = template
-            .replace(/\[ENCODE_URL\]/g, encodedUrl)
-            .replace(/\[URL\]/g, targetUrl);
+            .replace(/\[ENCODE_URL\]|\{\{ENCODE_URL\}\}/g, encodedUrl)
+            .replace(/\[URL\]|\{\{URL\}\}/g, targetUrl);
 
           iframe.src = finalUrl;
         });
 
-        // Prevent scroll jump
+        // Prevent unwanted scrolling
         window.scrollTo(0, 0);
       }
 
@@ -47,7 +47,7 @@ window.addEventListener('load', () => {
     }
   }
 
-  // Fetch templates
+  // Load Templates
   fetch('https://traffic-exchange.github.io/api/auto-traffic-templates.json')
     .then(res => res.ok ? res.json() : Promise.reject("Template fetch failed"))
     .then(data => {
@@ -63,7 +63,7 @@ window.addEventListener('load', () => {
     })
     .finally(tryStartTraffic);
 
-  // Fetch target URLs
+  // Load Target URLs
   fetch('https://traffic-exchange.github.io/api/auto-traffic-urls.json')
     .then(res => res.ok ? res.json() : Promise.reject("URL fetch failed"))
     .then(data => {
