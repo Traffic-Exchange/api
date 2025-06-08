@@ -202,7 +202,27 @@ document.head.appendChild(style);
     loadSettings(); await loadTemplates();
 	updateReuseToggleState();
     const param=decodeURIComponent(location.search.slice(1));
-    if(param){ const norm=normalizeUrl(param); if(norm){ urlInput.value=norm; startRun(); } else alert('Invalid URL'); }
+    if(param){ 
+        const norm=normalizeUrl(param); 
+        if(norm){ 
+            urlInput.value=norm;
+
+            const link = document.createElement('a');
+            link.href = query;
+            link.textContent = "🔗 Open generated backlink URL";
+            link.target = "_blank";
+            link.style.display = "inline-block";
+            link.style.marginTop = "0.8em";
+            link.style.fontWeight = "bold";
+
+            const downloadBtn = document.querySelector('#downloadBtn');
+            if (downloadBtn) {
+              downloadBtn.insertAdjacentElement('afterend', link);
+            }
+		
+            startRun(); 
+        } else alert('Invalid URL'); 
+    }
   });
 
 document.getElementById('testBtn').addEventListener('click', () => {
