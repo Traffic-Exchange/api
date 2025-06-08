@@ -48,7 +48,7 @@ window.addEventListener('load', () => {
   }
 
   // Fetch templates
-  fetch('https://traffic-exchange.github.io/api/auto-traffic.json')
+  fetch('https://traffic-exchange.github.io/api/auto-traffic-templates.json')
     .then(res => res.ok ? res.json() : Promise.reject("Template fetch failed"))
     .then(data => {
       if (Array.isArray(data) && data.length) {
