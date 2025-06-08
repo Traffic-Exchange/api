@@ -177,18 +177,10 @@
     const param=decodeURIComponent(location.search.slice(1));
     if(param){ const norm=normalizeUrl(param); if(norm){ urlInput.value=norm; startRun(); } else alert('Invalid URL'); }
   });
-/*
+
 document.addEventListener("DOMContentLoaded", () => {
   const here = window.location.origin + window.location.pathname;
   const testHref = here + "?" + encodeURIComponent(here);
   document.getElementById("testLink").href = testHref;
-});
-*/
-document.addEventListener("DOMContentLoaded", () => {
-  const base = window.location.origin + window.location.pathname;
-  const query = encodeURIComponent(base);
-  const fullURL = `${base}?${query}`;
-  const link = document.getElementById("testLink");
-  link.href = fullURL;
-  link.title = "Reload page with test URL: " + fullURL;
+  //startRun();
 });
