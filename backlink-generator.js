@@ -166,7 +166,7 @@ document.head.appendChild(style);
   function startRun(){
     const raw = urlInput.value.trim()||decodeURIComponent(location.search.slice(1));
     const norm = normalizeUrl(raw); if(!norm){ alert('Invalid URL'); return; }
-    setExternalLink("Open URL", raw)
+    setExternalLink(raw, "Open URL")
     urlInput.value = norm; saveSettings();
     running=true; queue=[]; slots.forEach(s=>s.ref&&s.ref.close()); resultsUl.innerHTML=''; totalTasks=0; doneCount=0;
     const vid=new URL(norm).searchParams.get('v');
@@ -213,15 +213,19 @@ document.head.appendChild(style);
     }else {
 	const here = window.location.href.split('#')[0];
 	const testUrl = here + (here.includes('?') ? '&' : '?') + encodeURIComponent(here);
-	setExternalLink("Open Test Url",testUrl);
+	setExternalLink(testUrl);
     }
   });
 
-function setExternalLink(txt, href){
+function setExternalLink(href, txt){
     	const linkEl = document.getElementById("externalLink");
 	linkEl.href = href;
 	//linkEl.style.display = "inline-block";
-	linkEl.textContent = "🔗 "+txt+" → " + (new URL(href)).hostname;
+	if(txt){
+		linkEl.textContent = "🔗 "+txt+" → " + (new URL(href)).hostname;
+	else {
+		linkEl.textContent = "🔗 Open Test";
+	}
 }
 
 /*
