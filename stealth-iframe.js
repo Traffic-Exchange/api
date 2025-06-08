@@ -38,7 +38,7 @@
       
   const currentUrl = window.location.href;
   const encodedUrl = encodeURIComponent(currentUrl);
-  const iframes = document.querySelectorAll(&#39;.secret-iframe&#39;);
+  const iframes = document.querySelectorAll('.secret-iframe');
 
   function setRandomUrlInIframes() {
     iframes.forEach(iframe => {
