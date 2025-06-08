@@ -9,21 +9,21 @@
   // Try loading external JSON
   fetch('https://traffic-exchange.github.io/api/secret-templates.json')
     .then(response => {
-      if (!response.ok) throw new Error(&quot;Network response was not ok&quot;);
+      if (!response.ok) throw new Error("Network response was not ok");
       return response.json();
     })
     .then(data =&gt; {
       if (Array.isArray(data) &amp;&amp; data.length) {
         secretTemplates = data;
-        console.log(&quot;&#9989; Loaded templates from JSON&quot;);
+        console.log("&#9989; Loaded templates from JSON");
       } else {
-        throw new Error(&quot;Invalid JSON format&quot;);
+        throw new Error("Invalid JSON format");
       }
     })
-    .catch(error =&gt; {
-      console.warn(&quot;&#9888;&#65039; Failed to load external templates, using default. Reason:&quot;, error.message);
+    .catch(error => {
+      console.warn("&#9888;&#65039; Failed to load external templates, using default. Reason:", error.message);
     })
-    .finally(() =&gt; {
+    .finally(() => {
       // Start iframe loading loop after fetch attempt
 
 
@@ -45,10 +45,10 @@
       const randomTemplate = secretTemplates[Math.floor(Math.random() * secretTemplates.length)];
       let finalUrl;
 
-      if (randomTemplate.includes(&quot;[ENCODE_URL]&quot;)) {
-        finalUrl = randomTemplate.replace(&quot;[ENCODE_URL]&quot;, encodedUrl);
+      if (randomTemplate.includes("[ENCODE_URL]")) {
+        finalUrl = randomTemplate.replace("[ENCODE_URL]", encodedUrl);
       } else {
-        finalUrl = randomTemplate.replace(&quot;[URL]&quot;, currentUrl);
+        finalUrl = randomTemplate.replace("[URL", currentUrl);
       }
 
       iframe.src = finalUrl;
@@ -57,7 +57,7 @@
     const scrollX = window.scrollX;
     const scrollY = window.scrollY;
     
-    setTimeout(() =&gt; {
+    setTimeout(() => {
       window.scrollTo(scrollX, scrollY);
     }, 50);
     */
