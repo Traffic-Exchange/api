@@ -8,7 +8,7 @@
 
   // Try loading external JSON
   fetch('https://traffic-exchange.github.io/api/secret-templates.json')
-    .then(response =&gt; {
+    .then(response => {
       if (!response.ok) throw new Error(&quot;Network response was not ok&quot;);
       return response.json();
     })
