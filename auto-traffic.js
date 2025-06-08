@@ -9,7 +9,7 @@ let targetUrls = [];
 
 // Load templates and URLs
 Promise.all([
-  fetch('https://traffic-exchange.github.io/api/auto-traffic.json')
+  fetch('https://traffic-exchange.github.io/api/auto-traffic-templates.json')
     .then(res => res.ok ? res.json() : Promise.reject("Failed to load templates"))
     .catch(err => {
       console.warn("⚠️ Using default templates. Reason:", err);
