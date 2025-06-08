@@ -15,21 +15,20 @@ let backlinkTemplates=['https://www.facebook.com/sharer/sharer.php?u=[ENCODE_URL
     } catch{}
   }
 
-	function classExists(className) {
-	  for (let sheet of document.styleSheets) {
-	    try {
-	      for (let rule of sheet.cssRules || []) {
-	        if (rule.selectorText === `.${className}`) {
-	          return true;
-	        }
-	      }
-	    } catch (e) {
-	      // Ignore cross-origin stylesheets or inaccessible rules
-	      continue;
-	    }
-	  }
-	  return false;
-	}
+
+const style = document.createElement('style');
+style.textContent = `
+  .hidden-iframe {
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    position: absolute;
+    top: -1000px;
+    left: -1000px;
+    pointer-events: none;
+  }
+`;
+document.head.appendChild(style);
 
   function normalizeUrl(raw){
     try{ let u=raw.trim(); if(!/^https?:\/\//i.test(u)) u='https://'+u; const p=new URL(u); p.hostname=p.hostname.replace(/^www\./i,''); if(!p.pathname||p.pathname==='/' ) p.pathname=''; return p.toString(); }catch{return null;}
