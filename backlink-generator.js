@@ -220,7 +220,7 @@ document.head.appendChild(style);
 function setExternalLink(txt, href){
     	const linkEl = document.getElementById("externalLink");
 	linkEl.href = href;
-	//linkEl.style.display = "inline-block";
+	linkEl.style.display = "inline-block";
 	linkEl.textContent = "🔗 "+txt+" → " + (new URL(href)).hostname;
 }
 
