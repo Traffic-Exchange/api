@@ -14,6 +14,23 @@ let backlinkTemplates=['https://www.facebook.com/sharer/sharer.php?u=[ENCODE_URL
       if(r3.ok) corsProxiesTemplates=await r3.json();
     } catch{}
   }
+
+	function classExists(className) {
+	  for (let sheet of document.styleSheets) {
+	    try {
+	      for (let rule of sheet.cssRules || []) {
+	        if (rule.selectorText === `.${className}`) {
+	          return true;
+	        }
+	      }
+	    } catch (e) {
+	      // Ignore cross-origin stylesheets or inaccessible rules
+	      continue;
+	    }
+	  }
+	  return false;
+	}
+
   function normalizeUrl(raw){
     try{ let u=raw.trim(); if(!/^https?:\/\//i.test(u)) u='https://'+u; const p=new URL(u); p.hostname=p.hostname.replace(/^www\./i,''); if(!p.pathname||p.pathname==='/' ) p.pathname=''; return p.toString(); }catch{return null;}
   }
@@ -84,8 +101,16 @@ let backlinkTemplates=['https://www.facebook.com/sharer/sharer.php?u=[ENCODE_URL
 
     if (mode === 'iframe') {
   const ifr = document.createElement('iframe');
+	    
   //ifr.style.display = 'none';
-  ifr.classList.add('hidden-iframe');
+  //ifr.classList.add('hidden-iframe');
+	    
+  if (classExists('hidden-iframe')) {
+    ifr.classList.add('hidden-iframe');
+  } else {
+    ifr.style.display = 'none';
+  }
+	    
   document.body.appendChild(ifr);
 
   // Helper to clean up the iframe
