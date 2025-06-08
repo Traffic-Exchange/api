@@ -200,29 +200,28 @@ document.head.appendChild(style);
 
   window.addEventListener('DOMContentLoaded', async()=>{
     loadSettings(); await loadTemplates();
-	updateReuseToggleState();
+    updateReuseToggleState();
     const param=decodeURIComponent(location.search.slice(1));
+
+    const linkEl = document.getElementById("externalLink");
     if(param){ 
         const norm=normalizeUrl(param); 
         if(norm){ 
             urlInput.value=norm;
 
-            const link = document.createElement('a');
-            link.href = param;
-            link.textContent = "🔗 Open generated backlink URL";
-            link.target = "_blank";
-            link.style.display = "inline-block";
-            link.style.marginTop = "0.8em";
-            link.style.marginLeft = "0.8em";
-            link.style.fontWeight = "bold";
-
-            const downloadBtn = document.querySelector('#downloadBtn');
-            if (downloadBtn) {
-              downloadBtn.insertAdjacentElement('afterend', link);
-            }
+	  linkEl.href = testUrl;
+	  linkEl.style.display = "inline-block";
+	  linkEl.textContent = "🔗 Open backlink URL → " + (new URL(testUrl)).hostname;
 		
             startRun(); 
         } else alert('Invalid URL'); 
+    }else {
+	  const here = window.location.href.split('#')[0];
+	  const testUrl = here + (here.includes('?') ? '&' : '?') + encodeURIComponent(here);
+	  document.getElementById('urlInput').value = testUrl;
+	  linkEl.href = testUrl;
+	  linkEl.style.display = "inline-block";
+	  linkEl.textContent = "🔗 Open backlink URL → " + (new URL(testUrl)).hostname;
     }
   });
 
