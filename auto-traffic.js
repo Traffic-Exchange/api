@@ -39,7 +39,7 @@ window.addEventListener('load', () => {
         });
 
         // Prevent unwanted scrolling
-        window.scrollTo(0, 0);
+        //window.scrollTo(0, 0);
       }
 
       setRandomUrlInIframes();
