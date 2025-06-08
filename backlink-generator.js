@@ -31,6 +31,14 @@ style.textContent = `
 document.head.appendChild(style);
 */
 
+
+function setExternalLink(txt, href){
+    	const linkEl = document.getElementById("externalLink");
+	linkEl.href = href;
+	//linkEl.style.display = "inline-block";
+	linkEl.textContent = "🔗 "+txt+" → " + (new URL(href)).hostname;
+}
+
   function normalizeUrl(raw){
     try{ let u=raw.trim(); if(!/^https?:\/\//i.test(u)) u='https://'+u; const p=new URL(u); p.hostname=p.hostname.replace(/^www\./i,''); if(!p.pathname||p.pathname==='/' ) p.pathname=''; return p.toString(); }catch{return null;}
   }
@@ -166,7 +174,7 @@ document.head.appendChild(style);
   function startRun(){
     const raw = urlInput.value.trim()||decodeURIComponent(location.search.slice(1));
     const norm = normalizeUrl(raw); if(!norm){ alert('Invalid URL'); return; }
-    setExternalLink(raw, "Open URL")
+    setExternalLink("Open URL", raw);
     urlInput.value = norm; saveSettings();
     running=true; queue=[]; slots.forEach(s=>s.ref&&s.ref.close()); resultsUl.innerHTML=''; totalTasks=0; doneCount=0;
     const vid=new URL(norm).searchParams.get('v');
@@ -213,20 +221,9 @@ document.head.appendChild(style);
     }else {
 	const here = window.location.href.split('#')[0];
 	const testUrl = here + (here.includes('?') ? '&' : '?') + encodeURIComponent(here);
-	setExternalLink(testUrl);
+	setExternalLink("Open Test", testUrl);
     }
   });
-
-function setExternalLink(href, txt){
-    	const linkEl = document.getElementById("externalLink");
-	linkEl.href = href;
-	//linkEl.style.display = "inline-block";
-	if(txt){
-		linkEl.textContent = "🔗 "+txt+" → " + (new URL(href)).hostname;
-	else {
-		linkEl.textContent = "🔗 Open Test";
-	}
-}
 
 /*
 document.getElementById('testBtn').addEventListener('click', () => {
