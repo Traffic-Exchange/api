@@ -1,5 +1,4 @@
 /* Fullscreen iframe styling */
-/* 
 #fullIframe,
 .full-iframe {
   display: block;
@@ -17,8 +16,8 @@
   left: -1000px;
   pointer-events: none;
 }
-*/
-.hidden-iframe {
+
+.hidden-iframe2 {
     position: absolute;
     width: 1px;
     height: 1px;
