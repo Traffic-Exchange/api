@@ -36,7 +36,7 @@ Promise.all([
   console.log("✅ Loaded target URLs.");
 
   // Create 3 iframes
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 5; i++) {
     const iframe = document.createElement('iframe');
     iframe.classList.add('hidden-iframe', 'auto-iframe');
     iframe.src = 'about:blank';
@@ -58,5 +58,5 @@ Promise.all([
 
   // Initial load and loop
   setRandomUrlInIframes();
-  setInterval(setRandomUrlInIframes, 15000);
+  setInterval(setRandomUrlInIframes, 30000);//15000
 });
