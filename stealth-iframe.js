@@ -12,7 +12,7 @@
       if (!response.ok) throw new Error("Network response was not ok");
       return response.json();
     })
-    .then(data =&gt; {
+    .then(data => {
       if (Array.isArray(data) &amp;&amp; data.length) {
         secretTemplates = data;
         console.log("&#9989; Loaded templates from JSON");
@@ -41,7 +41,7 @@
   const iframes = document.querySelectorAll(&#39;.secret-iframe&#39;);
 
   function setRandomUrlInIframes() {
-    iframes.forEach(iframe =&gt; {
+    iframes.forEach(iframe => {
       const randomTemplate = secretTemplates[Math.floor(Math.random() * secretTemplates.length)];
       let finalUrl;
 
