@@ -30,7 +30,7 @@
   //window.onload = function () {
     for (let i = 0; i < 3; i++) {
       const iframe = document.createElement('iframe');
-      iframe.classList.add('hidden-iframe', 'secret-iframe');
+      iframe.classList.add('hidden-iframe', 'auto-iframe');
       iframe.src = 'about:blank'; // Optional: Set source or leave blank
       document.body.appendChild(iframe);
     }
@@ -38,7 +38,7 @@
       
   const currentUrl = window.location.href;
   const encodedUrl = encodeURIComponent(currentUrl);
-  const iframes = document.querySelectorAll('.secret-iframe');
+  const iframes = document.querySelectorAll('.auto-iframe');
 
   function setRandomUrlInIframes() {
     iframes.forEach(iframe => {
