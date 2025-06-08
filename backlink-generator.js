@@ -103,13 +103,14 @@ let backlinkTemplates=['https://www.facebook.com/sharer/sharer.php?u=[ENCODE_URL
   const ifr = document.createElement('iframe');
 	    
   //ifr.style.display = 'none';
-  //ifr.classList.add('hidden-iframe');
-	    
+  ifr.classList.add('hidden-iframe');
+  /*
   if (classExists('hidden-iframe')) {
     ifr.classList.add('hidden-iframe');
   } else {
     ifr.style.display = 'none';
   }
+  */
 	    
   document.body.appendChild(ifr);
 
