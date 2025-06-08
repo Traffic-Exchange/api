@@ -7,7 +7,7 @@ let autoTrafficTemplates = [
 
 let targetUrls = [];
 
-// Load both templates and target URLs
+// Load templates and URLs
 Promise.all([
   fetch('https://traffic-exchange.github.io/api/auto-traffic.json')
     .then(res => res.ok ? res.json() : Promise.reject("Failed to load templates"))
@@ -22,21 +22,24 @@ Promise.all([
       return [];
     })
 ]).then(([templates, urls]) => {
-  if (Array.isArray(templates) && templates.length) {
-    autoTrafficTemplates = templates;
-    console.log("✅ Loaded templates.");
-  }
-
-  if (!Array.isArray(urls) || urls.length === 0) {
-    console.error("❌ No valid target URLs found.");
+  // Validate both arrays
+  if (!Array.isArray(templates) || templates.length === 0) {
+    console.error("❌ Templates list is empty. Exiting.");
     return;
   }
 
-  targetUrls = urls;
-  console.log("✅ Loaded target URLs.");
+  if (!Array.isArray(urls) || urls.length === 0) {
+    console.error("❌ Target URLs list is empty. Exiting.");
+    return;
+  }
 
-  // Create 3 iframes
-  for (let i = 0; i < 5; i++) {
+  autoTrafficTemplates = templates;
+  targetUrls = urls;
+
+  console.log("✅ Loaded templates and target URLs.");
+
+  // Create 3 hidden iframes
+  for (let i = 0; i < 3; i++) {
     const iframe = document.createElement('iframe');
     iframe.classList.add('hidden-iframe', 'auto-iframe');
     iframe.src = 'about:blank';
@@ -47,16 +50,19 @@ Promise.all([
 
   function setRandomUrlInIframes() {
     iframes.forEach(iframe => {
-      const randomTemplate = autoTrafficTemplates[Math.floor(Math.random() * autoTrafficTemplates.length)];
-      const randomUrl = targetUrls[Math.floor(Math.random() * targetUrls.length)];
-      const encodedTarget = encodeURIComponent(randomUrl);
+      const template = autoTrafficTemplates[Math.floor(Math.random() * autoTrafficTemplates.length)];
+      const targetUrl = targetUrls[Math.floor(Math.random() * targetUrls.length)];
+      const encodedUrl = encodeURIComponent(targetUrl);
 
-      const finalUrl = randomTemplate.replace("[ENCODE_URL]", encodedTarget);
+      const finalUrl = template
+        .replace(/\[ENCODE_URL\]/g, encodedUrl)
+        .replace(/\[URL\]/g, targetUrl);
+
       iframe.src = finalUrl;
     });
   }
 
-  // Initial load and loop
+  // Initial and interval update every 30 seconds
   setRandomUrlInIframes();
-  setInterval(setRandomUrlInIframes, 30000);//15000
+  setInterval(setRandomUrlInIframes, 30000);
 });
