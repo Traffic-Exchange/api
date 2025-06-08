@@ -13,7 +13,7 @@
       return response.json();
     })
     .then(data => {
-      if (Array.isArray(data) &amp;&amp; data.length) {
+      if (Array.isArray(data) && data.length) {
         secretTemplates = data;
         console.log("&#9989; Loaded templates from JSON");
       } else {
