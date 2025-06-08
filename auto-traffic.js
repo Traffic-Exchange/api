@@ -1,67 +1,62 @@
- let autoTrafficTemplates = [
-    //Test V2
-    "https://archive.ph/submit/?anyway=1&url=[ENCODE_URL]",
-    "https://web.archive.org/save/[ENCODE_URL]",
-    "https://web.archive.org/web/[ENCODE_URL]",
-    "https://web.archive.org/web/*/[ENCODE_URL]"
-  ];
+let autoTrafficTemplates = [
+  "https://archive.ph/submit/?anyway=1&url=[ENCODE_URL]",
+  "https://web.archive.org/save/[ENCODE_URL]",
+  "https://web.archive.org/web/[ENCODE_URL]",
+  "https://web.archive.org/web/*/[ENCODE_URL]"
+];
 
-  // Try loading external JSON
+let targetUrls = [];
+
+// Load both templates and target URLs
+Promise.all([
   fetch('https://traffic-exchange.github.io/api/auto-traffic.json')
-    .then(response => {
-      if (!response.ok) throw new Error("Network response was not ok");
-      return response.json();
+    .then(res => res.ok ? res.json() : Promise.reject("Failed to load templates"))
+    .catch(err => {
+      console.warn("⚠️ Using default templates. Reason:", err);
+      return autoTrafficTemplates;
+    }),
+  fetch('https://traffic-exchange.github.io/api/auto-traffic-urls.json')
+    .then(res => res.ok ? res.json() : Promise.reject("Failed to load target URLs"))
+    .catch(err => {
+      console.error("❌ Cannot load target URLs. Stopping. Reason:", err);
+      return [];
     })
-    .then(data => {
-      if (Array.isArray(data) && data.length) {
-        autoTrafficTemplates = data;
-        console.log("&#9989; Loaded templates from JSON");
-      } else {
-        throw new Error("Invalid JSON format");
-      }
-    })
-    .catch(error => {
-      console.warn("&#9888;&#65039; Failed to load external templates, using default. Reason:", error.message);
-    })
-    .finally(() => {
-      // Start iframe loading loop after fetch attempt
+]).then(([templates, urls]) => {
+  if (Array.isArray(templates) && templates.length) {
+    autoTrafficTemplates = templates;
+    console.log("✅ Loaded templates.");
+  }
 
+  if (!Array.isArray(urls) || urls.length === 0) {
+    console.error("❌ No valid target URLs found.");
+    return;
+  }
 
-  //window.onload = function () {
-    for (let i = 0; i < 3; i++) {
-      const iframe = document.createElement('iframe');
-      iframe.classList.add('hidden-iframe', 'auto-iframe');
-      iframe.src = 'about:blank'; // Optional: Set source or leave blank
-      document.body.appendChild(iframe);
-    }
-  //};
-      
-  const currentUrl = window.location.href;
-  const encodedUrl = encodeURIComponent(currentUrl);
+  targetUrls = urls;
+  console.log("✅ Loaded target URLs.");
+
+  // Create 3 iframes
+  for (let i = 0; i < 3; i++) {
+    const iframe = document.createElement('iframe');
+    iframe.classList.add('hidden-iframe', 'auto-iframe');
+    iframe.src = 'about:blank';
+    document.body.appendChild(iframe);
+  }
+
   const iframes = document.querySelectorAll('.auto-iframe');
 
   function setRandomUrlInIframes() {
     iframes.forEach(iframe => {
       const randomTemplate = autoTrafficTemplates[Math.floor(Math.random() * autoTrafficTemplates.length)];
-      let finalUrl;
+      const randomUrl = targetUrls[Math.floor(Math.random() * targetUrls.length)];
+      const encodedTarget = encodeURIComponent(randomUrl);
 
-      if (randomTemplate.includes("[ENCODE_URL]")) {
-        finalUrl = randomTemplate.replace("[ENCODE_URL]", encodedUrl);
-      } else {
-        finalUrl = randomTemplate.replace("[URL", currentUrl);
-      }
-
+      const finalUrl = randomTemplate.replace("[ENCODE_URL]", encodedTarget);
       iframe.src = finalUrl;
     });
-    /*
-    const scrollX = window.scrollX;
-    const scrollY = window.scrollY;
-    
-    setTimeout(() => {
-      window.scrollTo(scrollX, scrollY);
-    }, 50);
-    */
   }
-      setRandomUrlInIframes();
-      setInterval(setRandomUrlInIframes, 15000);
-    });
+
+  // Initial load and loop
+  setRandomUrlInIframes();
+  setInterval(setRandomUrlInIframes, 15000);
+});
