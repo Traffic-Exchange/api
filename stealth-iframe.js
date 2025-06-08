@@ -27,14 +27,14 @@
       // Start iframe loading loop after fetch attempt
 
 
-  window.onload = function () {
+  //window.onload = function () {
     for (let i = 0; i < 3; i++) {
       const iframe = document.createElement('iframe');
       iframe.classList.add('hidden-iframe', 'secret-iframe');
       iframe.src = 'about:blank'; // Optional: Set source or leave blank
       document.body.appendChild(iframe);
     }
-  };
+  //};
       
   const currentUrl = window.location.href;
   const encodedUrl = encodeURIComponent(currentUrl);
