@@ -178,9 +178,22 @@
     if(param){ const norm=normalizeUrl(param); if(norm){ urlInput.value=norm; startRun(); } else alert('Invalid URL'); }
   });
 
+/*
 document.addEventListener("DOMContentLoaded", () => {
   const here = window.location.origin + window.location.pathname;
   const testHref = here + "?" + encodeURIComponent(here);
   document.getElementById("testLink").href = testHref;
   //startRun();
+});
+*/
+
+document.addEventListener("DOMContentLoaded", () => {
+  const testLink = document.getElementById("testBtn");
+  if (testLink) {
+  	const here = window.location.origin + window.location.pathname;
+  	const testUrl = here + "?" + encodeURIComponent(here);
+	testLink.href = testUrl;
+	testLink.title = "Test backlink using: " + testUrl;
+	//startRun();
+  }
 });
