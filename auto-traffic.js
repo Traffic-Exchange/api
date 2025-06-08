@@ -6,63 +6,75 @@ let autoTrafficTemplates = [
 ];
 
 let targetUrls = [];
+let iframes = [];
 
-// Load templates and URLs
-Promise.all([
-  fetch('https://traffic-exchange.github.io/api/auto-traffic-templates.json')
-    .then(res => res.ok ? res.json() : Promise.reject("Failed to load templates"))
-    .catch(err => {
-      console.warn("⚠️ Using default templates. Reason:", err);
-      return autoTrafficTemplates;
-    }),
-  fetch('https://traffic-exchange.github.io/api/auto-traffic-urls.json')
-    .then(res => res.ok ? res.json() : Promise.reject("Failed to load target URLs"))
-    .catch(err => {
-      console.error("❌ Cannot load target URLs. Stopping. Reason:", err);
-      return [];
-    })
-]).then(([templates, urls]) => {
-  // Validate both arrays
-  if (!Array.isArray(templates) || templates.length === 0) {
-    console.error("❌ Templates list is empty. Exiting.");
-    return;
+// Immediately create 3 iframes for faster perceived load
+for (let i = 0; i < 3; i++) {
+  const iframe = document.createElement('iframe');
+  iframe.classList.add('hidden-iframe', 'auto-iframe');
+  iframe.src = 'about:blank';
+  document.body.appendChild(iframe);
+  iframes.push(iframe);
+}
+
+let templatesLoaded = false;
+let urlsLoaded = false;
+
+function tryStartTraffic() {
+  if (templatesLoaded && urlsLoaded && autoTrafficTemplates.length && targetUrls.length) {
+    console.log("🚀 Starting traffic loop...");
+
+    function setRandomUrlInIframes() {
+      iframes.forEach(iframe => {
+        const template = autoTrafficTemplates[Math.floor(Math.random() * autoTrafficTemplates.length)];
+        const targetUrl = targetUrls[Math.floor(Math.random() * targetUrls.length)];
+        const encodedUrl = encodeURIComponent(targetUrl);
+
+        const finalUrl = template
+          .replace(/\[ENCODE_URL\]/g, encodedUrl)
+          .replace(/\[URL\]/g, targetUrl);
+
+        iframe.src = finalUrl;
+      });
+    }
+
+    // Initial + every 30 seconds
+    setRandomUrlInIframes();
+    setInterval(setRandomUrlInIframes, 30000);
   }
+}
 
-  if (!Array.isArray(urls) || urls.length === 0) {
-    console.error("❌ Target URLs list is empty. Exiting.");
-    return;
-  }
+// Fetch templates
+fetch('https://traffic-exchange.github.io/api/auto-traffic.json')
+  .then(res => res.ok ? res.json() : Promise.reject("Template fetch failed"))
+  .then(data => {
+    if (Array.isArray(data) && data.length) {
+      autoTrafficTemplates = data;
+      templatesLoaded = true;
+      console.log("✅ Templates loaded.");
+    } else {
+      throw new Error("Invalid template data");
+    }
+  })
+  .catch(err => {
+    console.warn("⚠️ Template fallback in use. Reason:", err.message);
+    templatesLoaded = true; // fallback to defaults
+  })
+  .finally(tryStartTraffic);
 
-  autoTrafficTemplates = templates;
-  targetUrls = urls;
-
-  console.log("✅ Loaded templates and target URLs.");
-
-  // Create 3 hidden iframes
-  for (let i = 0; i < 3; i++) {
-    const iframe = document.createElement('iframe');
-    iframe.classList.add('hidden-iframe', 'auto-iframe');
-    iframe.src = 'about:blank';
-    document.body.appendChild(iframe);
-  }
-
-  const iframes = document.querySelectorAll('.auto-iframe');
-
-  function setRandomUrlInIframes() {
-    iframes.forEach(iframe => {
-      const template = autoTrafficTemplates[Math.floor(Math.random() * autoTrafficTemplates.length)];
-      const targetUrl = targetUrls[Math.floor(Math.random() * targetUrls.length)];
-      const encodedUrl = encodeURIComponent(targetUrl);
-
-      const finalUrl = template
-        .replace(/\[ENCODE_URL\]/g, encodedUrl)
-        .replace(/\[URL\]/g, targetUrl);
-
-      iframe.src = finalUrl;
-    });
-  }
-
-  // Initial and interval update every 30 seconds
-  setRandomUrlInIframes();
-  setInterval(setRandomUrlInIframes, 30000);
-});
+// Fetch target URLs
+fetch('https://traffic-exchange.github.io/api/auto-traffic-urls.json')
+  .then(res => res.ok ? res.json() : Promise.reject("URL fetch failed"))
+  .then(data => {
+    if (Array.isArray(data) && data.length) {
+      targetUrls = data;
+      urlsLoaded = true;
+      console.log("✅ Target URLs loaded.");
+    } else {
+      throw new Error("Invalid URL data");
+    }
+  })
+  .catch(err => {
+    console.error("❌ Cannot continue: No valid target URLs. Reason:", err.message);
+  })
+  .finally(tryStartTraffic);
