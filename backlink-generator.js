@@ -1,7 +1,7 @@
 const style = document.createElement('style');
 style.type = 'text/css';
 style.textContent = `
-  /* Fullscreen iframe styling */
+  /* Fullscreen iframe styling v2 */
   #fullIframe,
   .full-iframe {
     display: block;
