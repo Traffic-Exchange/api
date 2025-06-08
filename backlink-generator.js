@@ -47,7 +47,7 @@ document.head.appendChild(style);
   function loadSettings(){
     const c=document.cookie.split(';').map(x=>x.trim()).find(x=>x.startsWith('bg='));
     if(c) try{const s=JSON.parse(decodeURIComponent(c.slice(3)));modeSelect.value=s.mode||'iframe';reuseToggle.value=s.reuse||'fresh';concurrencyRange.value=s.conc||5;rerunCheckbox.checked=s.rerun!==false;shuffleCheckbox.checked=s.shuffle!==false;concurrentCount.textContent=concurrencyRange.value;return;}catch{}
-    modeSelect.value='iframe';reuseToggle.value='fresh';concurrencyRange.value=5;rerunCheckbox.checked=true;shuffleCheckbox.checked=true;concurrentCount.textContent=5;saveSettings();
+    modeSelect.value='iframe';reuseToggle.value='fresh';concurrencyRange.value=5;rerunCheckbox.checked=false;shuffleCheckbox.checked=true;concurrentCount.textContent=5;saveSettings();
   }
 
   const urlInput=document.getElementById('urlInput'),
