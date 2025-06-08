@@ -208,11 +208,12 @@ document.head.appendChild(style);
             urlInput.value=norm;
 
             const link = document.createElement('a');
-            link.href = norm;
+            link.href = param;
             link.textContent = "🔗 Open generated backlink URL";
             link.target = "_blank";
             link.style.display = "inline-block";
             link.style.marginTop = "0.8em";
+            link.style.marginLeft = "0.8em";
             link.style.fontWeight = "bold";
 
             const downloadBtn = document.querySelector('#downloadBtn');
