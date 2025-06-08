@@ -1,3 +1,25 @@
+const style = document.createElement('style');
+style.type = 'text/css';
+style.textContent = `
+  /* Fullscreen iframe styling */
+  #fullIframe,
+  .full-iframe {
+    display: block;
+    border: none;
+    width: 100%;
+    height: 100%;
+  }
+  .hidden-iframe {
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    position: absolute;
+    top: -1000px; /* Move off-screen */
+    left: -1000px;
+    pointer-events: none;
+  }
+`;
+document.head.appendChild(style);
 
 let backlinkTemplates=['https://www.facebook.com/sharer/sharer.php?u=[ENCODE_URL]','https://twitter.com/intent/tweet?url=[ENCODE_URL]&text=[ENCODE_TITLE]'],
       youtubeBacklinkTemplates=['https://video.ultra-zone.net/watch.en.html.gz?v=[ID]','https://video.ultra-zone.net/watch.en.html.gz?v={{ID}}'],
@@ -181,8 +203,13 @@ let backlinkTemplates=['https://www.facebook.com/sharer/sharer.php?u=[ENCODE_URL
   });
 
 document.getElementById('testBtn').addEventListener('click', () => {
+  /*	
   const here = window.location.href.split('#')[0];
   const testUrl = here + (here.includes('?') ? '&' : '?') + encodeURIComponent(here);
+  document.getElementById('urlInput').value = testUrl;
+  startRun();
+  */
+  const testUrl = window.location.href.split('#')[0];
   document.getElementById('urlInput').value = testUrl;
   startRun();
 });
