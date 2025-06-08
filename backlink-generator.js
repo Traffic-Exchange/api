@@ -179,10 +179,7 @@
   });
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("testBtn").addEventListener("click", () => {
-    const here = window.location.origin + window.location.pathname;
-    const testUrl = here + "?" + encodeURIComponent(here);
-    const input = document.getElementById("urlInput");
-    input.value = testUrl;
-  });
+  const here = window.location.origin + window.location.pathname;
+  const testHref = here + "?" + encodeURIComponent(here);
+  document.getElementById("testLink").href = testHref;
 });
