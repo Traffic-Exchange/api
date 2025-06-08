@@ -188,10 +188,10 @@ document.addEventListener("DOMContentLoaded", () => {
 */
 
 document.addEventListener("DOMContentLoaded", () => {
-  const testLink = document.getElementById("testBtn");
-  if (testLink) {
   	const here = window.location.origin + window.location.pathname;
   	const testUrl = here + "?" + encodeURIComponent(here);
+  const testLink = document.getElementById("testBtn");
+  if (testLink) {
 	testLink.href = testUrl;
 	testLink.title = "Test backlink using: " + testUrl;
 	//startRun();
