@@ -43,7 +43,7 @@
     iframes.forEach(iframe => {
       const randomTemplate = secretTemplates[Math.floor(Math.random() * secretTemplates.length)];
 
-      const finalUrl = template
+      const finalUrl = randomTemplate
             .replace(/\[ENCODE_URL\]|\{\{ENCODE_URL\}\}/g, encodedUrl)
             .replace(/\[URL\]|\{\{URL\}\}/g, targetUrl);
 
