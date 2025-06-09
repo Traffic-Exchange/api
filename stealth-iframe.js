@@ -59,5 +59,5 @@
     */
   }
       setRandomUrlInIframes();
-      setInterval(setRandomUrlInIframes, 30000);//15000 15 sec
+      setInterval(setRandomUrlInIframes, 60000);// 60 sec
     });
