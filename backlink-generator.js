@@ -174,7 +174,10 @@ document.head.appendChild(style);
     if(shuffleCheckbox.checked) templates.sort(()=>Math.random()-0.5);
     templates.forEach(tpl=> queue.push({mode:modeSelect.value, url:replacePlaceholders(tpl, buildMap(norm,vid))}));
 	
-    totalTasks=queue.length; updateProgress(); newUrlInput.value = location.origin+location.pathname+'?'+norm;
+    totalTasks=queue.length; 
+    updateProgress();
+    //newUrlInput.value = location.origin+location.pathname+'?'+norm;
+    newUrlInput.value = location.origin+'?'+norm;
 	
       // update browser’s query string without reloading
       window.history.replaceState(null, '', location.pathname + '?' + norm);
@@ -223,11 +226,3 @@ function setExternalLink(txt, href){
 	linkEl.style.display = "inline-block";
 	linkEl.textContent = "🔗 "+txt+" → " + (new URL(href)).hostname;
 }
-
-/*
-document.getElementById('testBtn').addEventListener('click', () => {
-  const testUrl = window.location.href.split('#')[0];
-  document.getElementById('urlInput').value = testUrl;
-  startRun();
-});
-*/
