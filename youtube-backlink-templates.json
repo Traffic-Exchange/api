@@ -1,4 +1,4 @@
 [
-  'https://video.ultra-zone.net/watch.en.html.gz?v=[ID]',
-  'https://video.ultra-zone.net/watch.en.html.gz?v={{ID}}'
+  "https://video.ultra-zone.net/watch.en.html.gz?v=[ID]",
+  "https://video.ultra-zone.net/watch.en.html.gz?v={{ID}}"
 ]
