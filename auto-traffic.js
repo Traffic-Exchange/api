@@ -1,9 +1,26 @@
-window.addEventListener('load', () => {
-  let autoTrafficTemplates = [
+window.addEventListener('load', () =>  [
+    /*
+    "https://archive.today/submit/?anyway=1&url=[ENCODE_URL]",
+    "https://archive.li/submit/?anyway=1&url=[ENCODE_URL]",
+    "https://archive.vn/submit/?anyway=1&url=[ENCODE_URL]",
+    "https://archive.fo/submit/?anyway=1&url=[ENCODE_URL]",
+    "https://archive.md/submit/?anyway=1&url=[ENCODE_URL]",
     "https://archive.ph/submit/?anyway=1&url=[ENCODE_URL]",
-    "https://web.archive.org/save/{{ENCODE_URL}}",
-    "https://mirror.example.com/visit?site=[URL]",
-    "https://backup.example.net/archive/{{URL}}"
+    "https://archive.is/submit/?anyway=1&url=[ENCODE_URL]",
+    */
+    "https://archive.today/[ENCODE_URL]",
+    "https://archive.li/[ENCODE_URL]",
+    "https://archive.vn/[ENCODE_URL]",
+    "https://archive.fo/[ENCODE_URL]",
+    "https://archive.md/[ENCODE_URL]",
+    "https://archive.ph/[ENCODE_URL]",
+    "https://archive.is/[ENCODE_URL]",
+    
+    "https://web.archive.org/save/[ENCODE_URL]",
+    "https://web.archive.org/web/[ENCODE_URL]",
+    "https://web.archive.org/web/*/[ENCODE_URL]",
+
+    "https://ghostarchive.org/search?term=[ENCODE_URL]"
   ];
 
   let targetUrls = [];
