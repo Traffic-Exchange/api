@@ -23,5 +23,6 @@
     "https://archive.md/[ENCODE_URL]",
     "https://archive.ph/[ENCODE_URL]",
     "https://archive.is/[ENCODE_URL]",
-    "http://image.thum.io/get/prefetch/[URL]"
+    "http://image.thum.io/get/prefetch/[URL]",
+    "https://ghostarchive.org/search?term=[ENCODE_URL]"
 ]
