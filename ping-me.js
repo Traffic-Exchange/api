@@ -1,5 +1,13 @@
   let secretTemplates = [
+    /*
+    "https://archive.today/submit/?anyway=1&url=[ENCODE_URL]",
+    "https://archive.li/submit/?anyway=1&url=[ENCODE_URL]",
+    "https://archive.vn/submit/?anyway=1&url=[ENCODE_URL]",
+    "https://archive.fo/submit/?anyway=1&url=[ENCODE_URL]",
+    "https://archive.md/submit/?anyway=1&url=[ENCODE_URL]",
     "https://archive.ph/submit/?anyway=1&url=[ENCODE_URL]",
+    "https://archive.is/submit/?anyway=1&url=[ENCODE_URL]",
+    */
     "https://web.archive.org/save/[ENCODE_URL]",
     "https://web.archive.org/web/[ENCODE_URL]",
     "https://web.archive.org/web/*/[ENCODE_URL]"
