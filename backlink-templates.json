@@ -29,5 +29,7 @@
   "https://developers.facebook.com/tools/debug/og/object?q=[ENCODE_URL]",
   "https://developers.facebook.com/tools/debug/sharing/?q=[ENCODE_URL]",
   "https://opengraphcheck.com/?url=[ENCODE_URL]",
-  "https://cards-dev.twitter.com/validator?url=[ENCODE_URL]"
+  "https://cards-dev.twitter.com/validator?url=[ENCODE_URL]",
+  
+    "https://ghostarchive.org/search?term=[ENCODE_URL]"
 ]
