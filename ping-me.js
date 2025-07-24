@@ -8,9 +8,19 @@
     "https://archive.ph/submit/?anyway=1&url=[ENCODE_URL]",
     "https://archive.is/submit/?anyway=1&url=[ENCODE_URL]",
     */
+    "https://archive.today/[ENCODE_URL]",
+    "https://archive.li/[ENCODE_URL]",
+    "https://archive.vn/[ENCODE_URL]",
+    "https://archive.fo/[ENCODE_URL]",
+    "https://archive.md/[ENCODE_URL]",
+    "https://archive.ph/[ENCODE_URL]",
+    "https://archive.is/[ENCODE_URL]",
+    
     "https://web.archive.org/save/[ENCODE_URL]",
     "https://web.archive.org/web/[ENCODE_URL]",
-    "https://web.archive.org/web/*/[ENCODE_URL]"
+    "https://web.archive.org/web/*/[ENCODE_URL]",
+
+    "https://ghostarchive.org/search?term=[ENCODE_URL]"
   ];
 
   // Try loading external JSON
