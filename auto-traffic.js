@@ -27,7 +27,7 @@ window.addEventListener('load', () =>  [
   let iframes = [];
 
   // Create hidden iframes immediately
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 2; i++) {
     const iframe = document.createElement('iframe');
     iframe.classList.add('hidden-iframe', 'auto-iframe');
     iframe.src = 'about:blank';
