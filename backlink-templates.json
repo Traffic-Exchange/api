@@ -1,4 +1,6 @@
 [
+  "https://cachedview.nl/#[URL]",
+  
   "https://archive.ph/submit/?anyway=1&url=[ENCODE_URL]",
   "https://web.archive.org/save/[URL]",
   "https://web.archive.org/web/[URL]",
