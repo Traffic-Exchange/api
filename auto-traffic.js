@@ -1,11 +1,13 @@
-window.addEventListener('load', () =>  [
-      "https://cachedview.nl/#[URL]",
-      "https://web.archive.org/save/[URL]",
-      "https://web.archive.org/web/[URL]",
-      "https://web.archive.org/web/*/[URL]",
-      "https://archive.today/submit/?anyway=1&url=[ENCODE_URL]",
-      "https://archive.today/[ENCODE_URL]"
-];
+window.addEventListener('load', () => {
+
+  let autoTrafficTemplates = [
+        "https://cachedview.nl/#[URL]",
+        "https://web.archive.org/save/[URL]",
+        "https://web.archive.org/web/[URL]",
+        "https://web.archive.org/web/*/[URL]",
+        "https://archive.today/submit/?anyway=1&url=[ENCODE_URL]",
+        "https://archive.today/[ENCODE_URL]"
+  ];
 
   let targetUrls = [];
   let iframes = [];
